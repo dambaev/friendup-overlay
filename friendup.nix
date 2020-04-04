@@ -1,5 +1,5 @@
 { stdenv, fetchzip, gcc, coreutils, bash
-, openssl, mysql, valgrind, libssh2_1, libaio, php73, libwebsockets, libuv, libssh_0_7
+, openssl, mysql, valgrind, libssh2_1, libaio, php73, libuv, libssh_0_7
 , libgd, file, libpng, libxml2, libjpeg, libgcrypt, samba, cmake, sqlite, rsync
 }:
 let
@@ -14,7 +14,7 @@ stdenv.mkDerivation {
     };
 
   buildInputs = [
-    openssl mysql valgrind libssh2_1 libaio php73 libwebsockets libuv libssh_0_7
+    openssl mysql valgrind libssh2_1 libaio php73 libuv libssh_0_7
     libgd file libpng libxml2 libjpeg libgcrypt samba cmake sqlite rsync
     ];
   NIX_CFLAGS_COMPILE = [
