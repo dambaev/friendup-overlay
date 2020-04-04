@@ -1,6 +1,6 @@
 { stdenv, fetchzip, gcc, coreutils, bash
 , openssl, mysql, valgrind, libssh2_1, libaio, php73, libwebsockets, libuv, libssh_0_7
-, libgd, file, libpng, libxml2, libjpeg, libgcrypt, samba, cmake
+, libgd, file, libpng, libxml2, libjpeg, libgcrypt, samba, cmake, sqlite, rsync
 }:
 let
   version = "1.2.3";
@@ -15,25 +15,21 @@ stdenv.mkDerivation {
 
   buildInputs = [
     openssl mysql valgrind libssh2_1 libaio php73 libwebsockets libuv libssh_0_7
-    libgd file libpng libxml2 libjpeg libgcrypt samba cmake
+    libgd file libpng libxml2 libjpeg libgcrypt samba cmake sqlite rsync
     ];
   NIX_CFLAGS_COMPILE = [
     "-I${libxml2.dev}/include/libxml2"
     "-I${samba.dev}/include/samba-4.0"
   ];
-  buildFlags = [ "OPENSSL_INTERNAL=0" ];
+  buildFlags = [
+    "OPENSSL_INTERNAL=0"
+  ];
+  makeFlags = [
+    "FRIEND_PATH=$(out)"
+  ];
   dontUseCmakeConfigure = true;
   preBuild = ''
-    make setup
-#   mkdir core/obj
-#   mkdir core/bin
-#   mkdir -p core/system/bin/emod/
-#   mkdir -p core/system/bin/fsys
-#   mkdir -p core/system/bin/loggers
-#   mkdir -p core/system/bin/services
-#   mkdir -p libs-ext/libwebsockets/build/lib/
-#   mkdir -p libs-ext/libssh2/build/src/
-#   ln -s ${libwebsockets}/lib/libwebsockets.a libs-ext/libwebsockets/build/lib
-#   ln -s ${libssh2_1}/lib/libssh2.a libs-ext/libssh2/build/src/
+    # it turned out, that we have to run setup before making
+    make setup FRIEND_PATH=$out
     '';
 }
