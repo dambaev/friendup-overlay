@@ -31,5 +31,8 @@ stdenv.mkDerivation {
   preBuild = ''
     # it turned out, that we have to run setup before making
     make setup FRIEND_PATH=$out
+    cp -r docs/ $out/
+    cp -r scripts $out/doc
+    cp -r db $out/
     '';
 }
