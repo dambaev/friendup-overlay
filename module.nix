@@ -117,14 +117,24 @@ in
           # which should be root of cfg/cfg.ini, which is ok, but then it tries to
           # load libraries from the same root and this is silly.
           # So we have to trick it a little
+          rm -rf /home/friendup/libs
           ln -fs ${pkgs.friendup}/libs /home/friendup/
+
+          rm -rf /home/friendup/sqlupdatesscripts
           ln -fs ${pkgs.friendup}/sqlupdatescripts /home/friendup/
+          rm -rf /home/friendup/authmods
           ln -fs ${pkgs.friendup}/authmods /home/friendup/
+          rm -rf /home/friendup/emod
           ln -fs ${pkgs.friendup}/emod /home/friendup/
+          rm -rf /home/friendup/php
           ln -fs ${pkgs.friendup}/php /home/friendup/
+          rm -rf /home/friendup/services
           ln -fs ${pkgs.friendup}/services /home/friendup/
+          rm -rf /home/friendup/loggers
           ln -fs ${pkgs.friendup}/loggers /home/friendup/
+          rm -rf /home/friendup/devices
           ln -fs ${pkgs.friendup}/devices /home/friendup/
+          rm -rf /home/friendup/fsys
           ln -fs ${pkgs.friendup}/fsys /home/friendup/
 
           rm -rf /home/friendup/resources # remove leftovers from possible previous versions
