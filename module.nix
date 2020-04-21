@@ -111,7 +111,12 @@ in
            friendup_hash = lib.last (lib.splitString "/" (toString pkgs.friendup));
         in
         ''
-        if [ ! -e /home/friendup/initialized-${friendup_hash} ]; then
+        hash_value=""
+        [ -e /home/friendup/initialized ] && {
+          hash_value=$(cat /home/friendup/initialized)
+        }
+        if [ "$hash_value" != "${friendup_hash}" ]; then
+          echo "HASH_MISMATCH! $hash_value != ${friendup_hash}"
           # surprisingly, Friendup wants to have write access to the directory,
           # in which it had been installed. Parts of it looks for FRIEND_HOME
           # which should be root of cfg/cfg.ini, which is ok, but then it tries to
@@ -150,7 +155,7 @@ in
 
           # DO NOT REMOVE. create mark, that means, that we had already done
           # initialization for current version
-          touch /home/friendup/initialized-${friendup_hash}
+          echo ${friendup_hash} > /home/friendup/initialized
         fi
 
         while [ ! -e /home/friendup/initialized-db ]; do
