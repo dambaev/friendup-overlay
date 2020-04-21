@@ -93,9 +93,8 @@ in
         # strace is helpful when you need to know which directory is missing again
         # and cause segfault
         # strace -f -o/home/friendup/trace.log ${pkgs.friendup}/FriendCore
-        # TODO: redirect stdout to some logfile, as friendup polutes logs with
-        # too much info
-        ${pkgs.friendup}/FriendCore
+        # redirect logs from stdout to not to polute system logs
+        ${pkgs.friendup}/FriendCore > /home/friendup/stdout
       '';
       environment = {
         FRIEND_HOME = "/home/friendup";
