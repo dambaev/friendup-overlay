@@ -16,6 +16,7 @@ stdenv.mkDerivation {
 
   buildInputs = [
     openssl mysql valgrind
+    libmysqlclient
     libaio php73 libuv libssh_0_7
     libgd file libpng libxml2 libjpeg libgcrypt samba cmake sqlite rsync
     ];
