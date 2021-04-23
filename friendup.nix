@@ -2,6 +2,7 @@
 , openssl, mysql, valgrind
 , libaio, php73, libuv, libssh_0_7
 , libgd, file, libpng, libxml2, libjpeg, libgcrypt, samba, cmake, sqlite, rsync
+, libmysqlclient
 }:
 let
   version = "1.2.3";
